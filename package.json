@@ -1,0 +1,35 @@
+{
+  "name": "image-keyword-generator",
+  "version": "1.0.0",
+  "description": "基于AI技术的智能图像关键词生成器，自动识别图片内容并生成精准标签",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "python3 -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weilun88313/Learning.git"
+  },
+  "keywords": [
+    "image-recognition",
+    "ai",
+    "keyword-generation",
+    "tailwindcss",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/weilun88313/Learning/issues"
+  },
+  "homepage": "https://github.com/weilun88313/Learning#readme",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "tailwindcss": "^4.1.0",
+    "vite": "^5.0.0"
+  }
+}

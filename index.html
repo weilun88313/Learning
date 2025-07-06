@@ -6,78 +6,94 @@
     <title>Image Keyword Generator - 智能图像关键词生成器</title>
     <meta name="description" content="基于AI技术的智能图像关键词生成器，自动识别图片内容并生成精准标签">
     <meta name="keywords" content="图像识别,关键词生成,AI,图片标签,智能标注">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="src/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖼️</text></svg>">
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 antialiased">
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-camera"></i>
-                <span>Image Keyword Generator</span>
+    <nav class="fixed top-0 w-full glass border-b border-gray-100 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-camera text-2xl text-blue-500"></i>
+                    <span class="text-xl font-semibold text-gray-900">Image Keyword Generator</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active">首页</a>
+                    <a href="#features" class="nav-link">功能</a>
+                    <a href="#about" class="nav-link">关于</a>
+                    <a href="#contact" class="nav-link">联系</a>
+                </div>
+                <div class="md:hidden flex flex-col cursor-pointer p-2" id="navToggle">
+                    <span class="w-5 h-0.5 bg-gray-700 mb-1 transition-all duration-200"></span>
+                    <span class="w-5 h-0.5 bg-gray-700 mb-1 transition-all duration-200"></span>
+                    <span class="w-5 h-0.5 bg-gray-700 transition-all duration-200"></span>
+                </div>
             </div>
-            <div class="nav-menu">
-                <a href="#home" class="nav-link active">首页</a>
-                <a href="#features" class="nav-link">功能</a>
-                <a href="#about" class="nav-link">关于</a>
-                <a href="#contact" class="nav-link">联系</a>
-            </div>
-            <div class="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white border-t border-gray-100" id="mobileMenu">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block text-gray-600 hover:text-blue-500 font-medium">首页</a>
+                <a href="#features" class="block text-gray-600 hover:text-blue-500 font-medium">功能</a>
+                <a href="#about" class="block text-gray-600 hover:text-blue-500 font-medium">关于</a>
+                <a href="#contact" class="block text-gray-600 hover:text-blue-500 font-medium">联系</a>
             </div>
         </div>
     </nav>
 
     <!-- 主要内容区域 -->
-    <main>
-        <!-- 首页部分 -->
-        <section id="home" class="hero-section">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">
-                        智能图像关键词生成器
-                    </h1>
-                    <p class="hero-subtitle">
-                        基于先进的AI技术，自动识别图片内容并生成精准的关键词标签，让您的图片更智能、更易发现
-                    </p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="scrollToUpload()">
-                            <i class="fas fa-upload"></i>
-                            开始使用
-                        </button>
-                        <button class="btn btn-secondary" onclick="scrollToFeatures()">
-                            <i class="fas fa-info-circle"></i>
-                            了解更多
-                        </button>
+    <main class="pt-16">
+        <!-- 首页英雄区域 -->
+        <section id="home" class="relative min-h-screen flex items-center bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white overflow-hidden">
+            <!-- 背景装饰 -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><pattern id=%22grain%22 width=%22100%22 height=%22100%22 patternUnits=%22userSpaceOnUse%22><circle cx=%2250%22 cy=%2250%22 r=%221%22 fill=%22white%22 opacity=%220.1%22/></pattern></defs><rect width=%22100%22 height=%22100%22 fill=%22url(%23grain)%22/></svg>')] opacity-30"></div>
+            
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+                            智能图像关键词生成器
+                        </h1>
+                        <p class="text-xl mb-8 opacity-90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            基于先进的AI技术，自动识别图片内容并生成精准的关键词标签，让您的图片更智能、更易发现
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <button class="btn-primary inline-flex items-center gap-2" onclick="scrollToUpload()">
+                                <i class="fas fa-upload"></i>
+                                开始使用
+                            </button>
+                            <button class="btn-secondary inline-flex items-center gap-2" onclick="scrollToFeatures()">
+                                <i class="fas fa-info-circle"></i>
+                                了解更多
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="hero-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-image"></i>
-                        <p>上传图片示例</p>
+                    <div class="flex justify-center lg:justify-end">
+                        <div class="w-96 h-72 bg-white/10 border-2 border-dashed border-white/30 rounded-3xl flex flex-col items-center justify-center backdrop-blur-sm">
+                            <i class="fas fa-image text-6xl text-white/60 mb-4"></i>
+                            <p class="text-white/80 font-medium">上传图片示例</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 上传区域 -->
-        <section id="upload" class="upload-section">
-            <div class="container">
-                <h2 class="section-title">上传图片</h2>
+        <section id="upload" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">上传图片</h2>
                 <div class="upload-area" id="uploadArea">
-                    <div class="upload-content">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <h3>拖拽图片到这里或点击选择</h3>
-                        <p>支持 JPG、PNG、GIF、WebP 格式，最大 10MB</p>
-                        <input type="file" id="fileInput" accept="image/*" multiple hidden>
-                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    <div class="relative z-10">
+                        <i class="fas fa-cloud-upload-alt text-6xl text-gray-400 mb-6 transition-colors duration-200"></i>
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-800">拖拽图片到这里或点击选择</h3>
+                        <p class="text-gray-500 mb-8 text-sm">支持 JPG、PNG、GIF、WebP 格式，最大 10MB</p>
+                        <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+                        <button class="btn-primary inline-flex items-center gap-2" onclick="document.getElementById('fileInput').click()">
                             <i class="fas fa-folder-open"></i>
                             选择文件
                         </button>
@@ -85,34 +101,34 @@
                 </div>
                 
                 <!-- 上传进度 -->
-                <div class="upload-progress" id="uploadProgress" style="display: none;">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progressFill"></div>
+                <div class="mt-8 text-center hidden" id="uploadProgress">
+                    <div class="w-full bg-gray-100 rounded-full h-1.5 mb-4">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-400 h-1.5 rounded-full transition-all duration-300" id="progressFill" style="width: 0%"></div>
                     </div>
-                    <p class="progress-text">正在处理图片...</p>
+                    <p class="text-gray-600 font-medium text-sm">正在处理图片...</p>
                 </div>
             </div>
         </section>
 
         <!-- 结果展示区域 -->
-        <section id="results" class="results-section" style="display: none;">
-            <div class="container">
-                <h2 class="section-title">识别结果</h2>
-                <div class="results-container">
-                    <div class="image-preview">
-                        <img id="previewImage" src="" alt="预览图片">
+        <section id="results" class="py-24 bg-gray-50 hidden" id="resultsSection">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">识别结果</h2>
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div class="text-center">
+                        <img id="previewImage" src="" alt="预览图片" class="max-w-full max-h-96 rounded-2xl shadow-xl transition-transform duration-300 hover:scale-105">
                     </div>
-                    <div class="keywords-container">
-                        <h3>生成的关键词</h3>
-                        <div class="keywords-cloud" id="keywordsCloud">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-8 text-gray-900">生成的关键词</h3>
+                        <div class="flex flex-wrap gap-3 mb-8 min-h-32" id="keywordsCloud">
                             <!-- 关键词标签将在这里动态生成 -->
                         </div>
-                        <div class="keywords-actions">
-                            <button class="btn btn-secondary" onclick="exportKeywords()">
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-secondary inline-flex items-center gap-2" onclick="exportKeywords()">
                                 <i class="fas fa-download"></i>
                                 导出关键词
                             </button>
-                            <button class="btn btn-primary" onclick="copyKeywords()">
+                            <button class="btn-primary inline-flex items-center gap-2" onclick="copyKeywords()">
                                 <i class="fas fa-copy"></i>
                                 复制关键词
                             </button>
@@ -123,90 +139,92 @@
         </section>
 
         <!-- 功能特性 -->
-        <section id="features" class="features-section">
-            <div class="container">
-                <h2 class="section-title">核心功能</h2>
-                <div class="features-grid">
+        <section id="features" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">核心功能</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-eye"></i>
                         </div>
-                        <h3>智能识别</h3>
-                        <p>基于先进的AI模型，准确识别图片中的物体、场景、颜色等元素，提供精准的内容分析</p>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900">智能识别</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">基于先进的AI模型，准确识别图片中的物体、场景、颜色等元素，提供精准的内容分析</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-tags"></i>
                         </div>
-                        <h3>关键词生成</h3>
-                        <p>自动生成相关性强、覆盖面广的关键词标签，提升图片的可搜索性和曝光度</p>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900">关键词生成</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">自动生成相关性强、覆盖面广的关键词标签，提升图片的可搜索性和曝光度</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-edit"></i>
                         </div>
-                        <h3>灵活编辑</h3>
-                        <p>支持添加、删除、调整关键词，满足个性化需求，让标签更贴合您的业务场景</p>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900">灵活编辑</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">支持添加、删除、调整关键词，满足个性化需求，让标签更贴合您的业务场景</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-share-alt"></i>
                         </div>
-                        <h3>便捷导出</h3>
-                        <p>支持多种格式导出，一键复制分享，提高工作效率，让关键词管理更简单</p>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900">便捷导出</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">支持多种格式导出，一键复制分享，提高工作效率，让关键词管理更简单</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 使用场景 -->
-        <section id="use-cases" class="use-cases-section">
-            <div class="container">
-                <h2 class="section-title">适用场景</h2>
-                <div class="use-cases-grid">
+        <section id="use-cases" class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">适用场景</h2>
+                <div class="grid md:grid-cols-3 gap-8">
                     <div class="use-case-card">
                         <div class="use-case-icon">
                             <i class="fas fa-blog"></i>
                         </div>
-                        <h3>内容创作</h3>
-                        <p>为博客、社交媒体图片快速添加标签，提升内容曝光度和用户发现率</p>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900">内容创作</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">为博客、社交媒体图片快速添加标签，提升内容曝光度和用户发现率</p>
                     </div>
                     <div class="use-case-card">
                         <div class="use-case-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <h3>电商优化</h3>
-                        <p>优化产品图片SEO，提高搜索排名和转化率，让产品更容易被用户找到</p>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900">电商优化</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">优化产品图片SEO，提高搜索排名和转化率，让产品更容易被用户找到</p>
                     </div>
                     <div class="use-case-card">
                         <div class="use-case-icon">
                             <i class="fas fa-microscope"></i>
                         </div>
-                        <h3>学术研究</h3>
-                        <p>辅助图片标注工作，提高研究效率，为学术研究提供智能化的图片管理方案</p>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900">学术研究</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">辅助图片标注工作，提高研究效率，为学术研究提供智能化的图片管理方案</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 关于我们 -->
-        <section id="about" class="about-section">
-            <div class="container">
-                <h2 class="section-title">关于我们</h2>
-                <div class="about-content">
-                    <p>Image Keyword Generator 是一个基于人工智能技术的在线工具，致力于为用户提供高效、准确的图像关键词生成服务。我们采用先进的计算机视觉和自然语言处理技术，帮助用户快速获取图片的语义描述，让图片内容更智能、更易管理。</p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <h3>99%</h3>
-                            <p>识别准确率</p>
+        <section id="about" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">关于我们</h2>
+                <div class="text-center max-w-4xl mx-auto">
+                    <p class="text-lg text-gray-600 mb-12 leading-relaxed">
+                        Image Keyword Generator 是一个基于人工智能技术的在线工具，致力于为用户提供高效、准确的图像关键词生成服务。我们采用先进的计算机视觉和自然语言处理技术，帮助用户快速获取图片的语义描述，让图片内容更智能、更易管理。
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-blue-500 mb-3">99%</h3>
+                            <p class="text-gray-600 font-medium text-sm uppercase tracking-wider">识别准确率</p>
                         </div>
-                        <div class="stat-item">
-                            <h3>10秒</h3>
-                            <p>平均处理时间</p>
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-blue-500 mb-3">10秒</h3>
+                            <p class="text-gray-600 font-medium text-sm uppercase tracking-wider">平均处理时间</p>
                         </div>
-                        <div class="stat-item">
-                            <h3>1000+</h3>
-                            <p>服务用户数</p>
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-blue-500 mb-3">1000+</h3>
+                            <p class="text-gray-600 font-medium text-sm uppercase tracking-wider">服务用户数</p>
                         </div>
                     </div>
                 </div>
@@ -214,22 +232,22 @@
         </section>
 
         <!-- 联系信息 -->
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="section-title">联系我们</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
+        <section id="contact" class="py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">联系我们</h2>
+                <div class="text-center">
+                    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                         <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>support@imagekeyword.com</span>
+                            <i class="fas fa-envelope text-xl text-blue-500"></i>
+                            <span class="text-gray-700 font-medium text-sm">support@imagekeyword.com</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>400-123-4567</span>
+                            <i class="fas fa-phone text-xl text-blue-500"></i>
+                            <span class="text-gray-700 font-medium text-sm">400-123-4567</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>北京市朝阳区科技园区</span>
+                            <i class="fas fa-map-marker-alt text-xl text-blue-500"></i>
+                            <span class="text-gray-700 font-medium text-sm">北京市朝阳区科技园区</span>
                         </div>
                     </div>
                 </div>
@@ -238,50 +256,52 @@
     </main>
 
     <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Image Keyword Generator</h3>
-                    <p>智能图像关键词生成器，让图片更智能、更易发现。基于先进的AI技术，为您提供精准的图片内容识别和关键词生成服务。</p>
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 text-white">Image Keyword Generator</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        智能图像关键词生成器，让图片更智能、更易发现。基于先进的AI技术，为您提供精准的图片内容识别和关键词生成服务。
+                    </p>
                 </div>
-                <div class="footer-section">
-                    <h4>快速链接</h4>
-                    <ul>
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#features">功能特性</a></li>
-                        <li><a href="#about">关于我们</a></li>
-                        <li><a href="#contact">联系方式</a></li>
+                <div>
+                    <h4 class="font-semibold mb-6 text-white">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">首页</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">功能特性</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">关于我们</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">联系方式</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>技术支持</h4>
-                    <ul>
-                        <li><a href="#">API文档</a></li>
-                        <li><a href="#">开发者中心</a></li>
-                        <li><a href="#">帮助中心</a></li>
-                        <li><a href="#">常见问题</a></li>
+                <div>
+                    <h4 class="font-semibold mb-6 text-white">技术支持</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">API文档</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">开发者中心</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">帮助中心</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 text-sm transition-colors duration-200">常见问题</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Image Keyword Generator. 保留所有权利。 | 隐私政策 | 服务条款</p>
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2024 Image Keyword Generator. 保留所有权利。 | 隐私政策 | 服务条款</p>
             </div>
         </div>
     </footer>
 
     <!-- 加载提示 -->
-    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden" id="loadingOverlay">
         <div class="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>正在处理图片...</p>
+            <i class="fas fa-spinner fa-spin text-4xl text-blue-500 mb-6"></i>
+            <p class="text-gray-600 font-medium text-sm">正在处理图片...</p>
         </div>
     </div>
 
     <!-- 通知提示 -->
-    <div class="notification" id="notification" style="display: none;">
+    <div class="notification hidden" id="notification">
         <span id="notificationMessage"></span>
-        <button class="notification-close" onclick="hideNotification()">
+        <button class="bg-transparent border-none text-gray-500 cursor-pointer p-1 text-sm rounded-full transition-all duration-200 hover:text-gray-700 hover:bg-gray-100" onclick="hideNotification()">
             <i class="fas fa-times"></i>
         </button>
     </div>

@@ -7,12 +7,14 @@ const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const uploadProgress = document.getElementById('uploadProgress');
 const progressFill = document.getElementById('progressFill');
-const resultsSection = document.getElementById('results');
+const resultsSection = document.getElementById('resultsSection');
 const previewImage = document.getElementById('previewImage');
 const keywordsCloud = document.getElementById('keywordsCloud');
 const loadingOverlay = document.getElementById('loadingOverlay');
 const notification = document.getElementById('notification');
 const notificationMessage = document.getElementById('notificationMessage');
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -38,13 +40,16 @@ function setupEventListeners() {
     
     // 点击上传区域
     uploadArea.addEventListener('click', () => fileInput.click());
+    
+    // 移动端菜单切换
+    if (navToggle) {
+        navToggle.addEventListener('click', toggleMobileMenu);
+    }
 }
 
 // 设置导航
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
 
     // 导航链接点击
     navLinks.forEach(link => {
@@ -54,16 +59,11 @@ function setupNavigation() {
             scrollToSection(targetId);
             
             // 移动端关闭菜单
-            navMenu.classList.remove('active');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
         });
     });
-
-    // 移动端菜单切换
-    if (navToggle) {
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    }
 
     // 滚动时更新导航状态
     window.addEventListener('scroll', updateNavigation);
@@ -79,19 +79,22 @@ function setupScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animate-fade-in');
             }
         });
     }, observerOptions);
 
     // 观察需要动画的元素
-    document.querySelectorAll('.feature-card, .use-case-card, .stat-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
+    document.querySelectorAll('.feature-card, .use-case-card').forEach(el => {
+        el.classList.add('opacity-0', 'translate-y-8');
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+}
+
+// 切换移动端菜单
+function toggleMobileMenu() {
+    mobileMenu.classList.toggle('hidden');
 }
 
 // 处理文件选择
@@ -238,8 +241,8 @@ function renderKeywords() {
     generatedKeywords.forEach((keyword, index) => {
         const tag = document.createElement('div');
         tag.className = 'keyword-tag';
-        tag.style.fontSize = `${0.8 + keyword.weight * 0.4}rem`;
-        tag.style.opacity = 0.6 + keyword.weight * 0.4;
+        tag.style.fontSize = `${0.875 + keyword.weight * 0.25}rem`;
+        tag.style.opacity = 0.7 + keyword.weight * 0.3;
         
         tag.innerHTML = `
             <span>${keyword.text}</span>
@@ -310,30 +313,34 @@ function copyKeywords() {
 
 // 显示结果
 function showResults() {
-    resultsSection.style.display = 'block';
+    resultsSection.classList.remove('hidden');
 }
 
 // 显示上传进度
 function showUploadProgress() {
-    uploadProgress.style.display = 'block';
+    uploadProgress.classList.remove('hidden');
 }
 
 // 隐藏上传进度
 function hideUploadProgress() {
-    uploadProgress.style.display = 'none';
+    uploadProgress.classList.add('hidden');
     updateProgress(0);
 }
 
 // 显示加载状态
 function showLoading(show) {
-    loadingOverlay.style.display = show ? 'flex' : 'none';
+    if (show) {
+        loadingOverlay.classList.remove('hidden');
+    } else {
+        loadingOverlay.classList.add('hidden');
+    }
 }
 
 // 显示通知
 function showNotification(message, type = 'success') {
     notificationMessage.textContent = message;
-    notification.className = `notification ${type}`;
-    notification.style.display = 'flex';
+    notification.className = `notification ${type === 'success' ? 'success' : 'error'}`;
+    notification.classList.remove('hidden');
     
     // 3秒后自动隐藏
     setTimeout(() => {
@@ -343,7 +350,7 @@ function showNotification(message, type = 'success') {
 
 // 隐藏通知
 function hideNotification() {
-    notification.style.display = 'none';
+    notification.classList.add('hidden');
 }
 
 // 滚动到指定区域
@@ -410,6 +417,9 @@ document.addEventListener('keydown', function(event) {
     // Escape 键隐藏通知
     if (event.key === 'Escape') {
         hideNotification();
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+        }
     }
 });
 
@@ -445,4 +455,14 @@ document.addEventListener('visibilitychange', function() {
         // 页面显示时的处理
         console.log('页面已显示');
     }
-}); 
+});
+
+// 添加CSS动画类
+const style = document.createElement('style');
+style.textContent = `
+  .animate-fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+`;
+document.head.appendChild(style); 
